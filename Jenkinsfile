@@ -1,8 +1,8 @@
-def CONTAINER_NAME = "calculator"
 def ENV_NAME = getEnvName(env.BRANCH_NAME)
+def CONTAINER_NAME = "calculator-"+ENV_NAME
 def CONTAINER_TAG = getTag(env.BUILD_NUMBER, env.BRANCH_NAME)
 def HTTP_PORT = getHTTPPort(env.BRANCH_NAME)
-def EMAIL_RECIPIENTS = "philippe.guemkamsimo@gmail.com"
+def EMAIL_RECIPIENTS = "hisamistolz@gmail.com"
 
 
 node {
@@ -96,14 +96,14 @@ def sendEmail(recipients) {
 }
 
 String getEnvName(String branchName) {
-    if (branchName == 'main') {
+    if (branchName == 'master') {
         return 'prod'
     }
     return (branchName == 'develop') ? 'uat' : 'dev'
 }
 
 String getHTTPPort(String branchName) {
-    if (branchName == 'main') {
+    if (branchName == 'master') {
         return '9003'
     }
     return (branchName == 'develop') ? '9002' : '9001'
