@@ -24,7 +24,7 @@ node {
           // Build the project and run tests using Maven,
             sh "mvn clean install"
         }
-        //pour sonaqube
+    
         stage('Sonarqube Analysis') {
             // Perform SonarQube analysis for code quality
             withSonarQubeEnv('SonarQubeLocalServer') {
