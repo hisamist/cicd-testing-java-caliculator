@@ -31,7 +31,7 @@ node {
                 sh " mvn sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
             }
             // Wait for the quality gate result from SonarQube
-            timeout(time: 1, unit: 'MINUTES') {
+            timeout(time: 2, unit: 'MINUTES') {
                 def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
                 if (qg.status != 'OK') {
                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
@@ -82,7 +82,7 @@ def imagePrune(containerName) {
 }
 // Helper function to build the Docker image
 def imageBuild(containerName, tag) {
-    sh "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
+    sh "docker build -t $containerName:$tag   --pull --no-cache ."
     echo "Image build complete"
 }
 
@@ -96,7 +96,7 @@ def pushToImage(containerName, tag, dockerUser, dockerPassword) {
 
 // Helper function to run the Docker container
 def runApp(containerName, tag, dockerHubUser, httpPort, envName) {
-    sh "docker pull $dockerHubUser/$containerName"
+    sh "docker pull $dockerHubUser/$containerName:$tag"
     sh "docker run --rm --env SPRING_ACTIVE_PROFILES=$envName -d -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
 }
