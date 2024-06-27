@@ -119,9 +119,9 @@ String getEnvName(String branchName) {
 // Function to get the HTTP port based on the branch name
 String getHTTPPort(String branchName) {
     if (branchName == 'master') {
-        return '9001'
+        return '9003'
     }
-    return (branchName == 'develop') ? '9002' : '8090'
+    return (branchName == 'develop') ? '9002' : '9001'
 }
 // Function to get the Docker image tag based on the build number and branch name
 String getTag(String buildNumber, String branchName) {
