@@ -21,7 +21,7 @@ node {
         }
 
         stage('Build with test') {
-          // Build the project and run tests using Maven
+          // Build the project and run tests using Maven,
             sh "mvn clean install"
         }
 
