@@ -100,8 +100,13 @@
               <goal>integration-test</goal>
               <goal>verify</goal>
             </goals>
-          </execution>
+        </execution>
         </executions>
+      </plugin>
+	  <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>4.0.0.4121</version>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -118,7 +123,7 @@
             <id>report</id>
             <phase>test</phase>
             <goals>
-              <goal>report</goal>
+            <goal>report</goal>
             </goals>
           </execution>
         </executions>
